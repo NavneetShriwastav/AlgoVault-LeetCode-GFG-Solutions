@@ -1,0 +1,17 @@
+class Solution 
+{ 
+    //Function to return max value that can be put in knapsack of capacity W.
+    static int knapSack(int W, int wt[], int val[], int n) 
+    { 
+         //base case(think about the smallest valid input)
+         //if either there is no items or if the capacity of bag is 0,the profit would be 0
+         if(n==0 || W==0) return 0;
+         
+         //if the weight of item is <= capacity of knapsack,either we can add it or not add
+         if(wt[n-1]<=W) return Math.max(val[n-1]+knapSack(W-wt[n-1],wt,val,n-1),knapSack(W,wt,val,n-1));
+         //if the weight of the item is more than the capacity of knapsack then, we can't add it
+         else return knapSack(W,wt,val,n-1);
+                  
+    } 
+}
+//T(n) = 2T(n-1)+1 -> O(n^2)
